@@ -1,24 +1,10 @@
-const express = require('express');
-const swaggerUI = require('swagger-ui-express');
-const path = require('path');
-const YAML = require('yamljs');
-const userRouter = require('./resources/users/user.router');
+const fastify = require('fastify')({ logger: false });
+const { PORT } = require('./common/config');
 
-const app = express();
-const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
+fastify.register(require('./resources/users/user.router.js'));
+fastify.register(require('./resources/task/task.router.js'));
+fastify.register(require('./resources/board/board.router.js'));
 
-app.use(express.json());
-
-app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
-
-app.use('/', (req, res, next) => {
-  if (req.originalUrl === '/') {
-    res.send('Service is running!');
-    return;
-  }
-  next();
+fastify.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`)
 });
-
-app.use('/users', userRouter);
-
-module.exports = app;
