@@ -13,7 +13,8 @@
     "build": "rimraf ./build && tsc",
     "lint": "eslint --ext .js,.ts --fix src/",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
-    "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace"
+    "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace",
+    "start:prod": "webpack --config webpack.prod.js && node dist/app.bundle.js"
   },
   "license": "ISC",
   "engines": {
