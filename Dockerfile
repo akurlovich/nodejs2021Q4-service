@@ -1,14 +1,15 @@
-FROM node:16.13-alpine
+FROM node:16-alpine
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --production
 
-COPY . .
-
-COPY ./build ./build
+COPY ./tsconfig.json ./tsconfig.json
+COPY ./src ./src
+COPY ./doc ./doc
+RUN mkdir -p ./logs/
 
 CMD ["npm", "run", "start"]
 
