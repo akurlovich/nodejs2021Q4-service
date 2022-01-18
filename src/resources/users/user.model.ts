@@ -1,46 +1,32 @@
-import { v4 } from 'uuid';
-import { IUser } from '../../types/types';
+import { v4 as uuid } from 'uuid';
 
-// class User {
-//   id?: string = v4();
-//   name: string = 'username';
-//   login: string = 'userlogin';
-//   password: string = 'userpassword';
+class User {
+  id?: string;  
 
-//   constructor({ id, name, login, password }: IUser = {}) {
-//     this.id = id;
-//     this.name = name;
-//     this.login = login;
-//     this.password = password;
-//   }
+  name?: string;
 
-//   static toResponse(user: IUser) {
-//     const { id, name, login } = user;
-//     return { id, name, login };
-//   }
-// }
+  login?: string;
 
-export default class User {
-  id?: string;
-  name: string;
-  login: string;
   password?: string;
 
-  constructor({
-    id = v4(),
-    name = 'USER',
-    login = 'user',
-    password = 'password'
-  } = {} as IUser) {
+  constructor(
+    {
+      id = uuid(),
+      name = 'TEST_USER',
+      login = 'test_user',
+      password = 'P@55w0rd',
+    } = {} as User
+  ) {
     this.id = id;
     this.name = name;
     this.login = login;
     this.password = password;
   }
 
-  static toResponse(user: IUser): IUser {
+  static toResponse(user: User): User {
     const { id, name, login } = user;
     return { id, name, login };
   }
-};
+}
 
+export default User;

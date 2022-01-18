@@ -1,72 +1,35 @@
-# RS School REST service
 
-## Prerequisites
+# Run app
+### 1. Сlone repository:
 
-- Git - [Download & Install Git](https://git-scm.com/downloads).
-- Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+`git clone https://github.com/akurlovich/nodejs2021Q4-service.git`
 
-## Downloading
+### 2. Move to folder:
 
-```
-git clone {repository URL}
-```
+`cd nodejs2021Q4-service`
 
-## Installing NPM modules
+### 3. Checkout to branch "develop":
 
-```
-npm install
-```
+`git checkout PostgreSQL_Typeorm`
 
-## Running application
+### 4. Install dependencies:
 
-```
-npm start
-```
+`npm i`
 
-After starting the app on port (4000 as default) you can open
-in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
-For more information about OpenAPI/Swagger please visit https://swagger.io/.
+### 5. In the **first** terminal:
 
-## Testing
+`docker-compose up -d --build`
 
-After application running open new terminal and enter:
+`docker-compose up`
+### 6. In the **second** terminal:
 
-To run all tests without authorization
+`npm run docker:sh`
 
-```
-npm test
-```
+`npm run migration:generate`
 
-To run only one of all test suites (users, boards or tasks)
+`npm run migration:run`
 
-```
-npm test <suite name>
-```
+### 7. In the **third** terminal:
+`npm run test`
 
-To run all test with authorization
 
-```
-npm run test:auth
-```
-
-To run only specific test suite with authorization (users, boards or tasks)
-
-```
-npm run test:auth <suite name>
-```
-
-## Development
-
-If you're using VSCode, you can get a better developer experience from integration with [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extensions.
-
-### Auto-fix and format
-
-```
-npm run lint
-```
-
-### Debugging in VSCode
-
-Press <kbd>F5</kbd> to debug.
-
-For more information, visit: https://code.visualstudio.com/docs/editor/debugging

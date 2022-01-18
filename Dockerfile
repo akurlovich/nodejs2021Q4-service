@@ -1,15 +1,13 @@
-FROM node:16-alpine
+FROM node:14-alpine3.12
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package*.json .
 
-RUN npm install --production
+RUN npm install
 
-COPY ./tsconfig.json ./tsconfig.json
-COPY ./src ./src
-COPY ./doc ./doc
-RUN mkdir -p ./logs/
+COPY . .
 
-CMD ["npm", "run", "start"]
+RUN npm install -g nodemon
 
+CMD nodemon src/server.ts

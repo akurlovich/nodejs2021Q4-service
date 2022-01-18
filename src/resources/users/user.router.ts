@@ -1,90 +1,62 @@
-// import { Router } from 'express';
-import { Router } from "express";
-import { IUser } from "../../types/types";
-import User from './user.model';
-import usersService from './user.service';
+import { Router, Response, Request } from 'express';
+// import { CustomError } from '../../utils';
+import { getConnection } from 'typeorm';
+import { User } from '../../entity/User';
+import { Task } from '../../entity/Task';
+import {
+  getUsers,
+  getUser,
+  createUser,
+  updateUser,
+  deleteUser,
+} from '../../repositories/user';
 
-// const router = new Router();
 const router = Router();
 
-router.get('/', async (_, res) => {
-  try {
-    const users = await usersService.getAll();
-    if (users) {
-      res.json(users.map(User.toResponse));
-    } else {
-      res.status(400).json({message: 'Bad request'});
-    }
-  } catch (error) {
-    res.status(500).json(error);
-  }
+// get all users
+router.route('/').get(async (_req: Request, res: Response) => {
+  const users = await getUsers();
+
+  res.status(users ? 200 : 404).json(users.map(User.toResponse));
+});
+// get user
+router.route('/:id').get(async (req: Request, res: Response) => {
+  const userId = req.params['id'];
+  const user = await getUser(userId);
+
+  res.status(user ? 200 : 404).json(User.toResponse(user));
 });
 
-router.get('/', async (_, res) => {
-  try {
-    const users = await usersService.getAll();
-    if (users) {
-      res.json(users.map(User.toResponse));
-    } else {
-      res.status(400).json({message: 'Bad request'});
-    }
-  } catch (error) {
-    res.status(500).json(error);
-  }
+// create new user
+router.route('/').post(async (req: Request, res: Response) => {
+  const response = await createUser(req.body);
+  res.status(201).json(User.toResponse(response));
 });
 
-router.post('/', async (req, res) => {
-  try {
-    const user = await usersService.createUser((new User(req.body)) as IUser);
-    if (user) {
-      res.status(201).json(User.toResponse(user));
-    } else {
-      res.status(400).json({message: 'Bad request'});
-    }
-  } catch (error) {
-    res.status(500).json(error);
-  }
+// update user by id
+router.route('/:id').put(async (req: Request, res: Response) => {
+  const { body } = req;
+  const userId = req.params['id'];
+
+  const response = await updateUser(userId, body);
+  res.status(200).json(response);
 });
 
-router.get('/:id', async (req, res) => {
-  try {
-    const user = await usersService.getById(req.params.id);
-    if (user) {
-      res.json(User.toResponse(user));
-    } else {
-      res.status(404).json({message: 'User not found'});
-    }
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
+// delete user
+router.route('/:id').delete(async (req, res) => {
+  const userId = req.params.id;
+  await deleteUser(userId);
 
-router.put('/:id', async (req, res) => {
-  try {
-    const user = await usersService.putById(req.body, req.params.id);
-    if (user) {
-      res.status(200).json(User.toResponse(user));
-    } else {
-      res.status(400).json({message: 'Bad request'});
-    }
-  } catch (error) {
-    res.status(500).json(error);
-  }
+  await getConnection()
+    .createQueryBuilder()
+    .update(Task)
+    .set({
+      userId: null,
+    })
+    .where('userId = :userId', { userId })
+    .execute();
 
-});
-
-router.delete('/:id', async (req, res) => {
-  try {
-    const status = await usersService.deleteById(req.params.id);
-    if (status) {
-      res.status(204).json({message: 'The user has been deleted'});
-    } else {
-      res.status(404).json({message: 'User not found'});
-    }
-  } catch (error) {
-    res.status(500).json(error);
-  }
-  
+  res.status(204).json(null);
 });
 
 export default router;
