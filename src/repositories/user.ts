@@ -1,5 +1,4 @@
 import { getRepository } from 'typeorm';
-// import { Task } from '../entity/Task';
 import { User } from '../entity/User';
 
 export interface IUserPayload {

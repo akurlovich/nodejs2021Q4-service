@@ -1,5 +1,4 @@
 import { Router, Response, Request } from 'express';
-// import { CustomError } from '../../utils';
 import { Task } from '../../entity/Task';
 import {
   getTasks,

@@ -1,5 +1,4 @@
 import { Router, Response, Request } from 'express';
-// import { CustomError } from '../../utils';
 import { getConnection } from 'typeorm';
 import { User } from '../../entity/User';
 import { Task } from '../../entity/Task';

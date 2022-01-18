@@ -1,9 +1,4 @@
-// import { Request } from 'express';
 import morgan, { StreamOptions } from 'morgan';
-
-
-// morgan.token('reqstatus', (req: Request) => return req.statusCode);
-
 
 const stream: StreamOptions = {
   write: (message) => console.log(message),

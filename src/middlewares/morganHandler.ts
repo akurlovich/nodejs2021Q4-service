@@ -11,7 +11,6 @@ const stream: StreamOptions = {
   write: (message) => Logger.http(message),
 };
 
-
 const morganHandler = morgan(
   ':method :status :url Query params :query Body :body size :res[content-length] - :response-time ms',
 

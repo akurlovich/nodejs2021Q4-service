@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   server:
-    container_name: node_rest_server_1
+    container_name: node_rest_server_akurlovich
     build: .
     ports:
       - ${PORT}:${PORT}

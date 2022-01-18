@@ -1,6 +1,5 @@
 import 'reflect-metadata';
 import express, { Application, Request, Response, NextFunction } from 'express';
-// import cors from 'cors';
 import swaggerUI from 'swagger-ui-express';
 import * as path from 'path';
 import YAML from 'yamljs';
@@ -21,7 +20,6 @@ const app: Application = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
 
 app.use(express.json());
-// app.use(cors);
 
 app.use(async (_req: Request, res: Response, next) => {
   await TryDBConnect(() => {
@@ -42,9 +40,6 @@ app.use('/', (req: Request, res: Response, next: NextFunction) => {
   }
   next();
 });
-
-//  Promise.reject(Error('Oops'));
-// throw new Error('Ooops');
 
 app.use('/users', userRouter);
 app.use('/boards', boardRouter);

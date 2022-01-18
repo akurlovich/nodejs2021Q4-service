@@ -1,10 +1,6 @@
-
-
 import User from '../resources/users/user.model';
 import Task from '../resources/tasks/tasks.model';
 import Board from '../resources/boards/board.model';
-
-
 
 const users: User[] = [];
 const boards = [new Board()];
