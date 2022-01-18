@@ -17,7 +17,7 @@
   },
   "license": "ISC",
   "engines": {
-    "node": ">=14.0.0 <15"
+    "node": ">=16.0.0 <17"
   },
   "jest": {
     "testEnvironment": "node",
@@ -36,11 +36,18 @@
     ]
   },
   "dependencies": {
+    "@microsoft/tsdoc": "^0.13.2",
+    "@types/morgan": "^1.9.3",
+    "cors": "^2.8.5",
     "cross-env": "7.0.3",
     "dotenv": "9.0.0",
+    "eslint-plugin-tsdoc": "^0.2.14",
     "express": "4.17.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.7.1",
     "swagger-ui-express": "4.1.6",
     "tsc-watch": "^4.5.0",
+    "typeorm": "^0.2.41",
     "uuid": "8.3.2",
     "yamljs": "0.3.0"
   },
