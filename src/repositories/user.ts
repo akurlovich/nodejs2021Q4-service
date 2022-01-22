@@ -1,4 +1,6 @@
 import { getRepository } from 'typeorm';
+// import { Task } from '../entity/Task';
+import { hashString } from '../utils/hashStr';
 import { User } from '../entity/User';
 
 export interface IUserPayload {
@@ -17,9 +19,12 @@ export const getUsers = async (): Promise<Array<User>> => {
 export const createUser = async (payload: IUserPayload): Promise<User> => {
   const userRepository = getRepository(User);
   const user = new User();
+  const hashedPassword = await hashString(payload.password!)
+  console.log('hashString', )
   return userRepository.save({
     ...user,
     ...payload,
+    password: hashedPassword
   });
 };
 
@@ -49,7 +54,6 @@ export const deleteUser = async (
     return 'Deleted';
   }
   return 'Not found';
-
 };
 
 export const getUser = async (
