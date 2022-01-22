@@ -2,6 +2,7 @@ import Logger from './log';
 
 const handleException = (ex: Error): void => {
   Logger.error(`uncaughtException "${ex.message}"`);
+  // process.exit(1);
 };
 
 const handleRejectedPromise = (
@@ -11,6 +12,9 @@ const handleRejectedPromise = (
   Logger.error(
     `unhandledRejection, reason: ${reason} ${promise}`
   );
+  // Logger.error(`unhandledRejection, reason: ${reason}, `, { promise });
+
+  // process.exit(1);
 };
 
 export const registerExceptionHandler = (): void => {
