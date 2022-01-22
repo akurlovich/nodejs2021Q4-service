@@ -30,6 +30,6 @@
 `npm run migration:run`
 
 ### 7. In the **third** terminal:
-`npm run test`
+`npm run test:auth`
 
 
