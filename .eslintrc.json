@@ -1,5 +1,9 @@
 {
   "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "env": {
     "es2020": true,
     "jasmine": true,
@@ -11,22 +15,50 @@
     "ecmaVersion": 2021,
     "ecmaFeatures": {
       "impliedStrict": true
-    }
+    },
+    "project": "tsconfig.json"
   },
   "settings": {
-    "noInlineConfig": true
+    "noInlineConfig": false,
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"]
+    },
+    "node": {
+      "resolvePaths": ["node_modules/@types"],
+      "tryExtensions": [".js", ".json", ".node", ".ts", ".d.ts"]
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    }
   },
   "extends": [
     "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:node/recommended",
-    "airbnb-base",
+    "airbnb-typescript/base",
     "prettier"
   ],
   "rules": {
     "import/extensions": "off",
     "linebreak-style": "off",
+    "dot-notation": "off",
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
+    "no-param-reassign": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "import/no-cycle": "off",
+    "prefer-destructuring": "off",
+    "no-console": "off",
+    "import/no-unresolved": "off",
     "import/prefer-default-export": "off"
   }
 }
