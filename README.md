@@ -10,7 +10,7 @@
 
 ### 3. Checkout to branch "develop":
 
-`git checkout PostgreSQL_Typeorm`
+`git checkout Authentication_and_JWT`
 
 ### 4. Install dependencies:
 
