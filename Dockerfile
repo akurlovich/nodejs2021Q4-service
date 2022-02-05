@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:14-alpine3.12
 
 WORKDIR /app
 
@@ -8,6 +8,4 @@ RUN npm install
 
 COPY . .
 
-RUN npm install -g nodemon
-
-CMD nodemon src/server.ts
+CMD npm run start-nest:dev

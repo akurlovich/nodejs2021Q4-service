@@ -98,7 +98,7 @@ async function bootstrap(useFasify: string | undefined) {
 
     // Promise.reject(Error('Oops'));
     // throw new Error('Ooops');
-    console.log(`App listen on port ${PORT} express`);
+    console.log(`App listen on port ${PORT} NestJS`);
   }
 }
 bootstrap(USE_FASTIFY);
