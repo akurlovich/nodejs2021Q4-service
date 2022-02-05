@@ -1,7 +1,7 @@
 import winston from 'winston';
-import path from 'path';
+// import path from 'path';
 
-const LOGS_DIR = path.join(__dirname, '../logs');
+// const LOGS_DIR = path.join(__dirname, '../logs');
 
 const levels = {
   error: 0,
@@ -36,17 +36,17 @@ const format = winston.format.combine(
 const transports = [
   new winston.transports.Console({handleExceptions: true}),
   new winston.transports.File({
-    filename: `${LOGS_DIR}/error.log`,
+    filename: `logs/error.log`,
     level: 'error',
     handleExceptions: true,
     format: winston.format.json(),
   }),
   new winston.transports.File({
-    filename: `${LOGS_DIR}/all.log`,
+    filename: `logs/all.log`,
     format: winston.format.json(),
   }),
   new winston.transports.File({
-    filename: `${LOGS_DIR}/http.log`,
+    filename: `logs/http.log`,
     format: winston.format.json(),
     level: 'http',
   }),

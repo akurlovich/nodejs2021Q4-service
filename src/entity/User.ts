@@ -1,18 +1,19 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
+
 @Entity({ name: 'user' })
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id?: string;
 
   @Column('varchar', {  nullable: true })
-  name?: string = 'TEST_USER';
+  name?: string;
 
   @Column('varchar')
-  login?: string = 'test_user';
+  login?: string;
 
   @Column('varchar')
-  password?: string = 'P@55w0rd';
+  password?: string;
 
 
   static toResponse(user: User | undefined): User | undefined {
@@ -22,4 +23,6 @@ export class User {
     }
     return undefined;
   }
+
+  
 }

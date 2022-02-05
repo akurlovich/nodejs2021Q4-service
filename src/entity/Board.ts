@@ -15,7 +15,7 @@ export class Board {
   title?: string = 'Autotest board';
 
   @Column('json')
-  columns: IBoardColumn[] = [
+  columns?: IBoardColumn[] = [
     { id: null, title: 'Backlog', order: 1 } as IBoardColumn,
     { id: null, title: 'Sprint', order: 2 } as IBoardColumn,
   ];

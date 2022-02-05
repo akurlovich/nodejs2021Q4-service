@@ -1,26 +1,30 @@
-import {ConnectionOptions} from "typeorm";
-import { join } from 'path'
+import { ConnectionOptions } from 'typeorm';
+import { join } from 'path';
+import {
+  POSTGRES_DB,
+  POSTGRESS_HOST,
+  POSTGRESS_PORT,
+  POSTGRES_PASSWORD,
+  POSTGRES_USER,
+} from './common/config';
 
 export default {
-  type: "postgres",
-  host: process.env['POSTGRESS_HOST'],
-  port: process.env['POSTGRESS_PORT'] ||  5432,
-  username: process.env['POSTGRES_USER'] || "postgres",
-  password: process.env['POSTGRES_PASSWORD'] || "12345",
-  database: process.env['POSTGRES_DB'] || "postgres",
+  type: 'postgres',
+  host: POSTGRESS_HOST,
+  port: POSTGRESS_PORT,
+  username: POSTGRES_USER,
+  password: POSTGRES_PASSWORD,
+  database: POSTGRES_DB,
+  keepConnectionAlive: true,
   synchronize: false,
-  logging: true,
+  migrationsRun: true,
   autoReconnect: true,
   reconnectTries: Number.MAX_VALUE,
   reconnectInterval: 2000,
-  entities: [
-    join(__dirname, 'entity/*{.ts,.js}')
-  ],
-  migrations: [
-    join(__dirname, 'migrations/*{.ts,.js}')
-  ],
+  entities: [join(__dirname, 'entity/*{.ts,.js}')],
+  migrations: [join(__dirname, 'migrations/*{.ts,.js}')],
   cli: {
-    "entitiesDir": "src/entity",
-    "migrationsDir": "src/migrations",
+    entitiesDir: 'src/entity',
+    migrationsDir: 'src/migrations',
   },
 } as ConnectionOptions;
