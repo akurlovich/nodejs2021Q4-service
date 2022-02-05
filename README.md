@@ -10,26 +10,20 @@
 
 ### 3. Checkout to branch "develop":
 
-`git checkout Authentication_and_JWT`
+`git checkout Nest_JS`
 
 ### 4. Install dependencies:
 
 `npm i`
 
 ### 5. In the **first** terminal:
+`npm run start-nest:dev`
 
-`docker-compose up -d --build`
 
-`docker-compose up`
 ### 6. In the **second** terminal:
 
-`npm run docker:sh`
-
-`npm run migration:generate`
-
-`npm run migration:run`
-
-### 7. In the **third** terminal:
 `npm run test:auth`
+
+
 
 
